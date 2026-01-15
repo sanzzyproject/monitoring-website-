@@ -31,13 +31,12 @@ Frontend Architecture: Modern HTML5 Semantic & CSS3 Grid/Flexbox untuk antarmuka
 Deployment Ecosystem: Vercel Serverless untuk menjamin ketersediaan aplikasi dengan latency rendah di tepi jaringan (at the edge).
 
 ## 🚀 Implementasi & Deployment
-1. Kloning Repository
+**1. Kloning Repository**
 ```bash
 git clone [https://github.com/sanzzyproject/monitoring-website-.git](https://github.com/sanzzyproject/monitoring-website-.git)
 ```
 
-2. Eksekusi
-
+**2. Eksekusi**
 Aplikasi dapat dijalankan secara langsung melalui web server statis atau dengan membuka public/index.html pada browser modern yang mendukung standar ES6.
 
 ## 📂 Arsitektur Direktori
