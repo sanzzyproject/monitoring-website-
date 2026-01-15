@@ -23,6 +23,23 @@
 
 ---
 
+## 🛠️ Tech Stack & Integrasi
+
+Core Engine: Python & JavaScript (ES6+).
+API Framework: FastAPI untuk pengelolaan request yang asinkron dan berperforma tinggi.
+Frontend Architecture: Modern HTML5 Semantic & CSS3 Grid/Flexbox untuk antarmuka yang sepenuhnya responsif.
+Deployment Ecosystem: Vercel Serverless untuk menjamin ketersediaan aplikasi dengan latency rendah di tepi jaringan (at the edge).
+
+## 🚀 Implementasi & Deployment
+1. Kloning Repository
+```bash
+git clone [https://github.com/sanzzyproject/monitoring-website-.git](https://github.com/sanzzyproject/monitoring-website-.git)
+```
+
+2. Eksekusi
+
+Aplikasi dapat dijalankan secara langsung melalui web server statis atau dengan membuka public/index.html pada browser modern yang mendukung standar ES6.
+
 ## 📂 Arsitektur Direktori
 
 ```text
@@ -38,3 +55,8 @@
 ├── LICENSE               # Legal Terms (MIT License)
 └── README.md             # Technical Documentation
 ```
+## Strategi Deployment
+
+Proyek ini dikonfigurasi secara spesifik untuk Vercel Infrastructure:
+Hubungkan repositori GitHub ini ke dashboard Vercel.
+Konfigurasi vercel.json akan secara otomatis mengatur routing dan fungsi API tanpa memerlukan intervensi manual tambahan.
