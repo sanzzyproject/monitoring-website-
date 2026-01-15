@@ -42,18 +42,26 @@ Aplikasi dapat dijalankan secara langsung melalui web server statis atau dengan 
 
 ## 📂 Arsitektur Direktori
 
+Berikut adalah struktur direktori dari proyek **monitoring-website**:
 ```text
 .
-├── api/
-│   └── index.js          # Core Serverless Logic & API Endpoints
+├── app/
+│   ├── routes/
+│   │   ├── check.py        # Logika rute untuk pengecekan
+│   │   └── health.py       # Logika rute untuk health check
+│   ├── utils/
+│   │   ├── http_client.py  # Utilitas untuk permintaan HTTP
+│   │   └── validator.py    # Utilitas untuk validasi data
+│   └── main.py             # Entry point aplikasi Python
 ├── public/
-│   ├── index.html        # Entry Point & Optimized UI Structure
-│   ├── script.js         # Reactive Dashboard Logic & Monitoring Engine
-│   └── style.css         # Modern UI System & Micro-animations
-├── package.json          # Node.js Project Manifest
-├── vercel.json           # Production Deployment Configuration
-├── LICENSE               # Legal Terms (MIT License)
-└── README.md             # Technical Documentation
+│   ├── index.html          # File HTML utama (Frontend)
+│   ├── script.js           # Logika JavaScript client-side
+│   └── style.css           # Styling CSS
+├── LICENSE                 # File lisensi proyek
+├── README.md               # Dokumentasi proyek
+├── requirements.txt        # Daftar dependensi Python
+└── vercel.json             # Konfigurasi deployment Vercel
+
 ```
 ## Strategi Deployment
 
