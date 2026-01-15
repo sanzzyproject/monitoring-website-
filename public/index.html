@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PingChecker - Website Status Monitor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM11 17H13V19H11V17ZM11 5H13V15H11V5Z" fill="#0047FF"/>
+                </svg>
+                <h1>PingChecker</h1>
+            </div>
+            <p class="subtitle">Monitor website availability in real-time.</p>
+        </header>
+
+        <div class="card input-card">
+            <h2>Add Website</h2>
+            <p class="label">URL to Check</p>
+            <div class="input-group">
+                <span class="icon">🌐</span>
+                <input type="text" id="urlInput" placeholder="example.com" autocomplete="off">
+            </div>
+            <button id="checkBtn" onclick="checkWebsite()">Check Now</button>
+        </div>
+
+        <div class="card result-card" id="resultCard" style="display: none;">
+            <h2>API Response</h2>
+            
+            <div class="status-badge-container">
+                <div class="status-ring" id="statusRing">
+                    <div class="inner-status">
+                        <span id="statusCode">200</span>
+                        <small id="statusText">OK</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric">
+                    <span class="label">Status</span>
+                    <span class="value" id="resStatus">UP</span>
+                </div>
+                <div class="metric">
+                    <span class="label">Time</span>
+                    <span class="value" id="resTime">120ms</span>
+                </div>
+            </div>
+
+            <div class="json-box">
+                <p class="label">Raw JSON Response</p>
+                <pre><code id="jsonOutput">...</code></pre>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Powered by FastAPI & Vercel</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
