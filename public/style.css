@@ -1,12 +1,13 @@
 :root {
-    --primary: #0047FF;
-    --primary-hover: #0037c4;
-    --bg-color: #F5F7FA;
+    --primary: #0029FF; /* Biru terang sesuai gambar */
+    --primary-hover: #001ec4;
+    --bg-color: #F8F9FD;
     --card-bg: #FFFFFF;
-    --text-main: #1A1A1A;
+    --text-main: #111827;
     --text-muted: #6B7280;
     --success: #10B981;
-    --error: #EF4444;
+    --danger: #EF4444;
+    --warning: #F59E0B;
     --border: #E5E7EB;
 }
 
@@ -17,96 +18,190 @@
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: 'Inter', sans-serif;
     background-color: var(--bg-color);
     color: var(--text-main);
-    display: flex;
-    justify-content: center;
     padding: 20px;
-    min-height: 100vh;
 }
 
-.container {
-    width: 100%;
-    max-width: 400px; /* Mobile first layout mimicking app interface */
+.main-container {
+    max-width: 480px; /* Lebar mobile app seperti di screenshot */
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-/* Header */
+/* HEADER */
 .header {
-    text-align: center;
     margin-bottom: 10px;
 }
-.logo {
+.brand {
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 8px;
-    margin-bottom: 5px;
-}
-.logo h1 {
-    font-size: 24px;
-    color: var(--primary);
     font-weight: 700;
+    color: var(--primary);
+    font-size: 18px;
+    margin-bottom: 20px;
 }
-.subtitle {
-    color: var(--text-muted);
-    font-size: 14px;
+.user-welcome h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #111;
+    line-height: 1.2;
 }
 
-/* Cards */
+/* CARDS GLOBAL */
 .card {
     background: var(--card-bg);
     border-radius: 16px;
-    padding: 24px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    border: 1px solid rgba(0,0,0,0.02);
 }
 
-.card h2 {
+/* STATS GRID */
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 kolom */
+    gap: 12px;
+}
+
+.stat-card-blue {
+    grid-column: span 2; /* Full width */
+    background-color: var(--primary);
+    color: white;
+}
+.stat-card-blue h3, .stat-card-blue .stat-desc {
+    color: rgba(255,255,255,0.8);
+}
+.stat-card-blue .stat-number {
+    color: white;
+}
+
+.stat-card-white h3 { font-size: 14px; color: var(--text-main); font-weight: 600; }
+.stat-desc { font-size: 12px; margin-top: 4px; color: var(--text-muted); }
+
+.stat-number {
+    display: block;
+    font-size: 36px;
+    font-weight: 700;
+    margin: 8px 0;
+}
+.text-success { color: var(--success); }
+.text-danger { color: var(--danger); }
+
+/* CHARTS */
+.charts-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.chart-card h3 {
     font-size: 18px;
-    margin-bottom: 16px;
+    margin-bottom: 15px;
     font-weight: 600;
 }
 
-/* Input Styles */
-.label {
-    font-size: 12px;
-    color: var(--text-muted);
-    margin-bottom: 8px;
-    display: block;
-    font-weight: 500;
-}
-
-.input-group {
+/* Pie Chart CSS Only */
+.pie-chart-container {
     display: flex;
     align-items: center;
-    background: #F9FAFB;
-    border: 1px solid var(--border);
+    justify-content: space-between;
+    padding: 10px 0;
+}
+.pie-chart {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: conic-gradient(var(--success) 0% 100%, var(--danger) 100% 100%);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.5s;
+}
+/* Efek bolong di tengah (Donut chart) - opsional sesuai selera, tapi gambar full pie */
+/* Jika ingin full pie seperti gambar 1, hapus .pie-hole background */
+.pie-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.legend-item { font-size: 14px; display: flex; align-items: center; gap: 6px; }
+.dot { width: 10px; height: 10px; border-radius: 2px; display: block; }
+.dot.up { background: var(--success); }
+.dot.down { background: var(--danger); }
+
+/* Bar Chart Simple */
+.bar-chart-container {
+    height: 150px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    gap: 8px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 5px;
+}
+.bar {
+    width: 20px;
+    background: var(--success);
+    border-radius: 4px 4px 0 0;
+    transition: height 0.5s;
+    position: relative;
+}
+.bar:hover::after {
+    content: attr(data-val);
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    background: #333;
+    color: white;
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+.placeholder-text {
+    width: 100%;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 12px;
+    align-self: center;
+}
+
+/* ADD FORM (Image 3) */
+.add-label {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 8px;
+}
+.add-card h2 { font-size: 20px; margin-bottom: 8px; }
+.add-card p { font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px; }
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    background: #F3F4F6;
+    border: 1px solid transparent;
     border-radius: 8px;
     padding: 12px;
-    margin-bottom: 20px;
-    transition: border-color 0.2s;
+    margin-bottom: 16px;
+    transition: 0.2s;
 }
-
-.input-group:focus-within {
-    border-color: var(--primary);
-}
-
-.input-group .icon {
-    margin-right: 10px;
-    opacity: 0.5;
-}
-
-.input-group input {
+.input-wrapper:focus-within { border-color: var(--primary); background: #fff; }
+.input-icon { margin-right: 10px; opacity: 0.6; }
+.input-wrapper input {
     border: none;
     background: transparent;
     width: 100%;
     outline: none;
     font-size: 14px;
-    color: var(--text-main);
 }
 
 button {
@@ -116,97 +211,83 @@ button {
     border: none;
     padding: 14px;
     border-radius: 8px;
-    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s;
+    font-size: 14px;
 }
+button:hover { background: var(--primary-hover); }
 
-button:hover {
-    background: var(--primary-hover);
-}
-
-button:disabled {
-    background: var(--text-muted);
-    cursor: not-allowed;
-}
-
-/* Result Styles */
-.status-badge-container {
+/* LIST SECTION */
+.table-header {
     display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
 }
+.header-actions { display: flex; gap: 30px; margin-right: 10px; }
 
-.status-ring {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    border: 8px solid var(--border);
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+.list-item:last-child { border-bottom: none; }
+.site-url {
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
+}
+.site-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.status-icon svg { width: 20px; height: 20px; }
+.btn-delete {
+    background: #F3F4F6;
+    color: #666;
+    padding: 8px;
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
+    border-radius: 6px;
 }
+.btn-delete:hover { background: #fee2e2; color: #ef4444; }
 
-.status-ring.up { border-color: var(--success); }
-.status-ring.down { border-color: var(--error); }
-
-.inner-status {
-    text-align: center;
+/* Notification Toast */
+#toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
 }
-
-#statusCode {
-    display: block;
-    font-size: 24px;
-    font-weight: 700;
-}
-
-.metrics-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+.toast {
+    background: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
     gap: 10px;
-    margin-bottom: 20px;
-}
-
-.metric {
-    background: #F9FAFB;
-    padding: 10px;
-    border-radius: 8px;
-    text-align: center;
-}
-
-.metric .value {
-    display: block;
-    font-weight: 600;
     font-size: 14px;
-    margin-top: 4px;
+    border-left: 4px solid var(--primary);
+    animation: slideIn 0.3s ease;
 }
+.toast.error { border-left-color: var(--danger); }
+.toast.success { border-left-color: var(--success); }
 
-#resStatus.up { color: var(--success); }
-#resStatus.down { color: var(--error); }
-
-.json-box {
-    background: #111827;
-    border-radius: 8px;
-    padding: 12px;
-    overflow-x: auto;
-}
-
-.json-box .label {
-    color: #9CA3AF;
-    margin-bottom: 5px;
-}
-
-.json-box pre {
-    color: #A7F3D0;
-    font-size: 11px;
-    font-family: monospace;
-}
-
-.footer {
-    text-align: center;
-    font-size: 12px;
-    color: var(--text-muted);
-    margin-top: 20px;
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
 }
