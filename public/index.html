@@ -3,63 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PingChecker - Website Status Monitor</title>
+    <title>PingNotify Dashboard</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="container">
+    <div id="toast-container"></div>
+
+    <div class="main-container">
         <header class="header">
-            <div class="logo">
+            <div class="brand">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM11 17H13V19H11V17ZM11 5H13V15H11V5Z" fill="#0047FF"/>
+                    <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#0047FF"/>
+                    <path d="M11 17H13V19H11V17ZM11 5H13V15H11V5Z" fill="white"/>
                 </svg>
-                <h1>PingChecker</h1>
+                <span>PingNotify</span>
             </div>
-            <p class="subtitle">Monitor website availability in real-time.</p>
+            <div class="user-welcome">
+                <h1>Welcome, User!</h1>
+            </div>
         </header>
 
-        <div class="card input-card">
-            <h2>Add Website</h2>
-            <p class="label">URL to Check</p>
-            <div class="input-group">
-                <span class="icon">🌐</span>
-                <input type="text" id="urlInput" placeholder="example.com" autocomplete="off">
+        <div class="stats-grid">
+            <div class="card stat-card-blue">
+                <h3>Total Websites</h3>
+                <span class="stat-number" id="totalCount">0</span>
+                <p class="stat-desc">Monitored websites</p>
             </div>
-            <button id="checkBtn" onclick="checkWebsite()">Check Now</button>
+            
+            <div class="card stat-card-white">
+                <h3>Websites Online</h3>
+                <span class="stat-number text-success" id="onlineCount">0</span>
+                <p class="stat-desc">Currently up and running</p>
+            </div>
+
+            <div class="card stat-card-white">
+                <h3>Websites Offline</h3>
+                <span class="stat-number text-danger" id="offlineCount">0</span>
+                <p class="stat-desc">Need attention</p>
+            </div>
         </div>
 
-        <div class="card result-card" id="resultCard" style="display: none;">
-            <h2>API Response</h2>
-            
-            <div class="status-badge-container">
-                <div class="status-ring" id="statusRing">
-                    <div class="inner-status">
-                        <span id="statusCode">200</span>
-                        <small id="statusText">OK</small>
+        <div class="charts-grid">
+            <div class="card chart-card">
+                <h3>Website Status</h3>
+                <div class="pie-chart-container">
+                    <div class="pie-chart" id="statusPie">
+                        <div class="pie-hole"></div>
+                    </div>
+                    <div class="pie-legend">
+                        <div class="legend-item"><span class="dot up"></span> Up <span id="legendUp">100%</span></div>
+                        <div class="legend-item"><span class="dot down"></span> Down <span id="legendDown">0%</span></div>
                     </div>
                 </div>
             </div>
 
-            <div class="metrics-grid">
-                <div class="metric">
-                    <span class="label">Status</span>
-                    <span class="value" id="resStatus">UP</span>
+            <div class="card chart-card">
+                <h3>Response Times (ms)</h3>
+                <div class="bar-chart-container" id="barChart">
+                    <div class="placeholder-text">Add websites to see data</div>
                 </div>
-                <div class="metric">
-                    <span class="label">Time</span>
-                    <span class="value" id="resTime">120ms</span>
-                </div>
-            </div>
-
-            <div class="json-box">
-                <p class="label">Raw JSON Response</p>
-                <pre><code id="jsonOutput">...</code></pre>
             </div>
         </div>
 
-        <div class="footer">
-            <p>Powered by FastAPI & Vercel</p>
+        <div class="card add-card">
+            <div class="add-header">
+                <span class="add-label">ADD WEBSITE</span>
+                <h2>Monitor New Website</h2>
+                <p>Enter a URL to add a new website to your monitoring list. We'll check its status regularly.</p>
+            </div>
+            
+            <div class="input-wrapper">
+                <div class="input-icon">🌐</div>
+                <input type="text" id="urlInput" placeholder="https://example.com" autocomplete="off">
+            </div>
+
+            <button id="addBtn" onclick="addWebsite()">Add Website</button>
+        </div>
+
+        <div class="card list-card">
+            <h2>Your Websites</h2>
+            <div class="table-header">
+                <span>Website</span>
+                <div class="header-actions">
+                    <span>Status</span>
+                    <span>Actions</span>
+                </div>
+            </div>
+            
+            <div id="websiteList" class="website-list">
+                <div class="empty-state">No websites added yet.</div>
+            </div>
+        </div>
+        
+        <div style="display:none;">
+            <span id="statusCode"></span><span id="resTime"></span><span id="resStatus"></span>
         </div>
     </div>
 
